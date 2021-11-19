@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Geocoder Application</title>
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.6.0/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.6.0/mapbox-gl.js"></script>
+<style>
+body { margin: 0; padding: 0; }
+#map { position: absolute; top: 0; bottom: 0; width: 50%; }
+#searchBox{
+width: 100%;
+height: 10%;
+background-color: black;
+color: white;
+text-align: center;
+}
+#leftSection{
+    float: right;
+    height: 100%;
+    width: 50%;
+}
+</style>
+</head>
+
+<body>
+    <div id = "leftSection">
+        <div id="searchBox">
+            <h2>GEOCODER APPLICATION</h2>
+        </div>
+
+        <div id = "dropDownMenus">
+            <h3>Choose one of the functions provided bby the geoservice API!</h3>
+            <select name = "boroughs">
+                <option value="onea">1A</option>
+                <option value="oneb">1B</option>
+                <option value="onee">1E</option>
+                <option value="ap">AP</option>
+                <option value="two">2</option>
+                <option value="three">3</option>
+                <option value="threes">3S</option>
+            </select>
+            <h3>Choose one of the five boroughs of New York City!</h3>
+            <select name = "boroughs">
+                <option value="Brnx">Bronx</option>
+                <option value="Man">Manhattan</option>
+                <option value="Qns">Queens</option>
+                <option value="Brkly">Brooklyn</option>
+            </select>
+        </div>
+    </div>
+    <div id="map"></div>
+<script>
+	mapboxgl.accessToken = 'pk.eyJ1IjoiaW10aWF6bnljMSIsImEiOiJja3cycTN0czkwZnJiMm5tbXM3ejZzYjY2In0.vyqWrOu_0hqqpzofoJECLA';
+    const map = new mapboxgl.Map({
+    container: 'map', // container ID
+    style: 'mapbox://styles/mapbox/streets-v11', // style URL
+    center: [-74.5, 40], // starting position [lng, lat]
+    zoom: 11 // starting zoom
+});
+// Create a new marker.
+const marker = new mapboxgl.Marker()
+.setLngLat([-74.5, 40])
+.addTo(map);
+
+console.log("Hellp!!");
+const x = new XMLHttpRequest();
+x.open('GET', 'https://geoservice.planning.nyc.gov/geoservice/geoservice.svc/Function_1A?Borough=1&AddressNo=120&StreetName=bwy&Key=EAsAqrnWzxrjpbht');
+x.send();
+console.log(x.responseText);
+
+</script>
+ 
+</body>
+</html>
